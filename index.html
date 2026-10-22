@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeNexa — Platform Pembelajaran Pemrograman</title>
+    <link rel="icon" type="image/png" href="img/logo.png" />
+    <meta
+      name="description"
+      content="Platform pembelajaran interaktif Pemrograman Aplikasi dan Web untuk SMA Kelas X. Pelajari algoritma, HTML, CSS, hingga JavaScript secara menyenangkan."
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/welcome.css" />
+  </head>
+  <body class="welcome-body">
+    <!-- ════════ BACKGROUND SHAPES & DECORATIONS ════════ -->
+    <div class="blob-shape-top-left" aria-hidden="true"></div>
+    <div class="blob-shape-mid-right" aria-hidden="true"></div>
+    <div class="dot-grid-top-right" aria-hidden="true">
+      <svg
+        width="80"
+        height="80"
+        viewBox="0 0 80 80"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <circle cx="10" cy="10" r="3" fill="#93c5fd" />
+        <circle cx="28" cy="10" r="3" fill="#93c5fd" />
+        <circle cx="46" cy="10" r="3" fill="#93c5fd" />
+        <circle cx="64" cy="10" r="3" fill="#93c5fd" />
+        <circle cx="10" cy="28" r="3" fill="#93c5fd" />
+        <circle cx="28" cy="28" r="3" fill="#93c5fd" />
+        <circle cx="46" cy="28" r="3" fill="#93c5fd" />
+        <circle cx="64" cy="28" r="3" fill="#93c5fd" />
+        <circle cx="10" cy="46" r="3" fill="#93c5fd" />
+        <circle cx="28" cy="46" r="3" fill="#93c5fd" />
+        <circle cx="46" cy="46" r="3" fill="#93c5fd" />
+        <circle cx="64" cy="46" r="3" fill="#93c5fd" />
+        <circle cx="10" cy="64" r="3" fill="#93c5fd" />
+        <circle cx="28" cy="64" r="3" fill="#93c5fd" />
+        <circle cx="46" cy="64" r="3" fill="#93c5fd" />
+        <circle cx="64" cy="64" r="3" fill="#93c5fd" />
+      </svg>
+    </div>
+
+    <!-- ════════ FLOATING NAVBAR ════════ -->
+    <header class="navbar-wrapper">
+      <nav class="navbar floating-navbar" aria-label="Navigasi Utama">
+        <a href="index.html" class="nav-logo" aria-label="CodeNexa Beranda">
+          <img src="img/logo.png" alt="Logo CodeNexa" class="logo-img" />
+          <span class="logo-text"
+            >Code<span class="logo-accent">Nexa</span></span
+          >
+        </a>
+        <button
+          class="menu-toggle"
+          id="menu-toggle"
+          onclick="toggleNav()"
+          aria-label="Toggle menu"
+          aria-expanded="false"
+        >
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <div class="nav-links" id="nav-links">
+          <a class="nav-link active" href="index.html">Beranda</a>
+          <a class="nav-link" href="materi.html">Materi</a>
+          <a class="nav-link" href="kuis.html">Kuis</a>
+          <a class="nav-link" href="game.html">🎮 Game</a>
+        </div>
+      </nav>
+    </header>
+
+    <!-- ════════ HERO ════════ -->
+    <main>
+      <section class="hero-container">
+        <!-- Hero Text & CTA -->
+        <div class="hero-content">
+          <!-- Pill Badge -->
+          <div class="badge-pill">
+            <span class="badge-icon">🎓</span>
+            <span class="badge-text"
+              >Belajar &bull; Praktik &bull; Jadi Ahli</span
+            >
+          </div>
+
+          <!-- Main Heading -->
+          <h1 class="hero-title">
+            <span class="title-line">Selamat Datang di</span>
+            <span class="title-line title-highlight">
+              Platform
+              <svg
+                class="brush-underline"
+                viewBox="0 0 170 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4 10C50 3 120 3 166 10"
+                  stroke="#2563eb"
+                  stroke-width="4.5"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+            <span class="title-line">Pembelajaran</span>
+            <span class="title-line title-spark">
+              Pemrograman
+              <svg
+                class="spark-icon"
+                viewBox="0 0 32 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6 26L12 18M16 12V2M20 18L26 26"
+                  stroke="#2563eb"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </span>
+          </h1>
+
+          <!-- Description Paragraph -->
+          <p class="hero-subtitle">
+            Pelajari algoritma, HTML, CSS, hingga JavaScript dengan cara yang
+            menyenangkan — lengkap dengan kuis interaktif, materi terstruktur,
+            dan panduan belajar yang mudah dipahami.
+          </p>
+
+          <!-- CTA Button (Direct to materi.html) -->
+          <div class="hero-cta-wrapper">
+            <a
+              href="materi.html#tujuan"
+              class="btn-start-learning"
+              id="btn-mulai-belajar"
+            >
+              <span class="btn-icon"></span>
+              <span class="btn-text">Mulai Belajar</span>
+              <span class="btn-arrow">&rarr;</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero 3D Illustration -->
+        <div class="hero-visual">
+          <div class="visual-glow-backdrop"></div>
+          <img
+            src="img/hero-laptop-transparent.png"
+            alt="Ilustrasi Laptop Pemrograman dengan buku HTML, CSS, JavaScript dan tanaman"
+            class="hero-illustration-img"
+            loading="eager"
+          />
+        </div>
+      </section>
+
+      <!-- ════════ 4 BENEFIT CARDS ════════ -->
+      <section class="features-section" aria-label="Keunggulan Platform">
+        <div class="features-grid">
+          <!-- Card 1: Materi Terstruktur -->
+          <div class="feature-item">
+            <div class="feature-icon-box box-green">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#16a34a"
+                stroke-width="2.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="m12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83Z"
+                />
+                <path d="m22 12.5-8.58 3.91a2 2 0 0 1-1.66 0L3.18 12.5" />
+                <path d="m22 17.5-8.58 3.91a2 2 0 0 1-1.66 0L3.18 17.5" />
+              </svg>
+            </div>
+            <div class="feature-label">
+              <strong>Materi</strong>
+              <span>Terstruktur</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Kuis Interaktif -->
+          <div class="feature-item">
+            <div class="feature-icon-box box-purple">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#9333ea"
+                stroke-width="2.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+                <path d="m15 5 4 4" />
+              </svg>
+            </div>
+            <div class="feature-label">
+              <strong>Kuis</strong>
+              <span>Interaktif</span>
+            </div>
+          </div>
+
+          <!-- Card 3: Pantau Progres -->
+          <div class="feature-item">
+            <div class="feature-icon-box box-orange">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#ea580c"
+                stroke-width="2.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M18 20V10" />
+                <path d="M12 20V4" />
+                <path d="M6 20v-6" />
+              </svg>
+            </div>
+            <div class="feature-label">
+              <strong>Pantau</strong>
+              <span>Progres</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Mudah Dipahami -->
+          <div class="feature-item">
+            <div class="feature-icon-box box-blue">
+              <svg
+                width="28"
+                height="28"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#2563eb"
+                stroke-width="2.3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                <circle cx="9" cy="7" r="4" />
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+              </svg>
+            </div>
+            <div class="feature-label">
+              <strong>Mudah</strong>
+              <span>Dipahami</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ════════ TAGLINE DIVIDER ════════ -->
+      <section class="tagline-divider">
+        <span class="divider-line"></span>
+        <span class="divider-text">KEMBANGKAN SKILL, RAIH MASA DEPAN</span>
+        <span class="divider-line"></span>
+      </section>
+    </main>
+
+    <!-- ════════ FOOTER ════════ -->
+    <footer class="simple-landing-footer">
+      &copy; 2026 CodeNexa &nbsp;·&nbsp; Informatika SMA &nbsp;·&nbsp; Developer
+      ArrZzz
+    </footer>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>

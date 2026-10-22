@@ -1,0 +1,390 @@
+/* ══════════════════════════════════════════════════════
+   materi.css — Styles for materi.html
+   PembelajaranKode | Informatika SMA Kelas X
+════════════════════════════════════════════════════════ */
+
+/* ─── Layout ─── */
+.layout {
+  display: flex;
+  flex: 1;
+  min-height: calc(100vh - 58px);
+}
+
+/* ─── Sidebar ─── */
+.sidebar {
+  width: 265px;
+  min-width: 265px;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  padding: 20px 0 32px;
+  overflow-y: auto;
+  position: sticky;
+  top: 58px;
+  height: calc(100vh - 58px);
+  transition: transform .25s ease;
+}
+
+.sidebar-section-title {
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  padding: 0 20px 8px;
+  margin-top: 16px;
+}
+
+.sidebar-section-title:first-child { margin-top: 0; }
+
+.sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 20px;
+  cursor: pointer;
+  border-radius: 8px;
+  margin: 2px 10px;
+  font-size: .875rem;
+  font-weight: 500;
+  color: var(--muted);
+  transition: background .15s, color .15s;
+  border: none;
+  background: none;
+  text-align: left;
+  width: calc(100% - 20px);
+  font-family: var(--font);
+}
+
+.sidebar-item:hover {
+  background: #eef2ff;
+  color: var(--primary);
+}
+
+.sidebar-item.active {
+  background: #eef2ff;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.sidebar-item .item-num {
+  background: var(--border);
+  border-radius: 6px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .72rem;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+
+.sidebar-item.active .item-num {
+  background: var(--primary);
+  color: #fff;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--border);
+  margin: 12px 20px;
+}
+
+/* ─── Main Content ─── */
+.main-content {
+  flex: 1;
+  padding: 36px 32px;
+  max-width: 840px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ─── Chapter ─── */
+.chapter { display: none; }
+.chapter.active { display: block; animation: fadeIn .3s ease; }
+
+.chapter-badge {
+  display: inline-block;
+  background: #eef2ff;
+  color: var(--primary);
+  font-size: .72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  padding: 4px 12px;
+  border-radius: 999px;
+  margin-bottom: 12px;
+}
+
+.chapter h1 {
+  font-size: clamp(1.4rem, 4vw, 2rem);
+  font-weight: 800;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.chapter-lead {
+  color: var(--muted);
+  font-size: 1rem;
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 20px;
+}
+
+.chapter h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 30px 0 10px;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.chapter h2::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 18px;
+  background: var(--primary);
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.chapter h3 {
+  font-size: .98rem;
+  font-weight: 600;
+  margin: 18px 0 8px;
+  color: var(--primary2);
+}
+
+.chapter p { margin-bottom: 12px; }
+.chapter ul, .chapter ol { padding-left: 22px; margin-bottom: 12px; }
+.chapter li { margin-bottom: 6px; }
+
+/* ─── Flowchart ─── */
+.flowchart-wrap {
+  background: #f8f9ff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px 16px 12px;
+  text-align: center;
+  margin: 14px 0;
+  overflow-x: auto;
+}
+
+.flowchart-wrap svg { max-width: 100%; }
+.flowchart-caption {
+  font-size: .8rem;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* ─── Progress Navigation ─── */
+.progress-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 44px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* ─── Tujuan Pembelajaran Styling ─── */
+.tp-hero {
+  margin-bottom: 24px;
+}
+
+.tp-stats-banner {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+
+.tp-stat-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.tp-stat-icon {
+  font-size: 1.5rem;
+  background: #fff;
+  border-radius: 10px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+}
+
+.tp-stat-item strong {
+  display: block;
+  font-size: 0.92rem;
+  color: #0f172a;
+}
+
+.tp-stat-item span {
+  display: block;
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.3;
+}
+
+.tp-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.tp-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 22px 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.tp-card:hover {
+  transform: translateY(-2px);
+  border-color: #93c5fd;
+  box-shadow: 0 8px 24px rgba(37, 99, 235, 0.08);
+}
+
+.tp-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.tp-number-badge {
+  background: #eff6ff;
+  color: #2563eb;
+  font-weight: 700;
+  font-size: 0.78rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.tp-card-icon {
+  font-size: 1.4rem;
+}
+
+.tp-card h3 {
+  font-size: 1.15rem;
+  font-weight: 750;
+  color: #0f172a;
+  margin: 0 0 6px 0;
+}
+
+.tp-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-bottom: 14px;
+  line-height: 1.4;
+}
+
+.tp-targets-title {
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tp-list {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.tp-list li {
+  font-size: 0.86rem;
+  color: #334155;
+  margin-bottom: 6px;
+  line-height: 1.45;
+}
+
+.tp-card-btn {
+  font-size: 0.82rem;
+  padding: 6px 14px;
+  border-radius: 8px;
+}
+
+/* ─── Per-Chapter Learning Objectives Box ─── */
+.learning-objectives-box {
+  background: linear-gradient(135deg, #f0f7ff 0%, #e0f2fe 100%);
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid #2563eb;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 18px 0 24px;
+}
+
+.lob-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.92rem;
+  color: #1e3a8a;
+  margin-bottom: 8px;
+}
+
+.lob-list {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.lob-list li {
+  font-size: 0.86rem;
+  color: #1e40af;
+  margin-bottom: 4px;
+  line-height: 1.4;
+}
+
+/* ─── Mobile Sidebar ─── */
+@media (max-width: 768px) {
+  .tp-stats-banner {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .layout { flex-direction: column; }
+
+  .sidebar {
+    position: fixed;
+    top: 58px;
+    left: 0;
+    bottom: 0;
+    z-index: 90;
+    transform: translateX(-100%);
+    box-shadow: 4px 0 20px rgba(0,0,0,.12);
+    min-width: 260px;
+    width: 260px;
+  }
+
+  .sidebar.open { transform: translateX(0); }
+
+  .main-content { padding: 24px 18px; }
+}
+
+@media (max-width: 480px) {
+  .main-content { padding: 18px 14px; }
+  .progress-nav .btn { flex: 1; justify-content: center; }
+}

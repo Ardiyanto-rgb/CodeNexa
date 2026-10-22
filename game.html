@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arena Game Mini — CodeNexa</title>
+  <meta name="description" content="Mini game seru untuk asah logika dan sintaks pemrograman tanpa jenuh." />
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/game.css" />
+</head>
+<body>
+
+  <!-- ════════ NAVBAR ════════ -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo" aria-label="CodeNexa Beranda">
+      <img src="img/logo.png" alt="Logo CodeNexa" class="logo-img" />
+      <span class="logo-text">Code<span class="logo-accent">Nexa</span></span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" onclick="toggleNav()" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <div class="nav-links" id="nav-links">
+      <a class="nav-link" href="index.html">Beranda</a>
+      <a class="nav-link" href="materi.html">Materi</a>
+      <a class="nav-link" href="kuis.html">Kuis</a>
+      <a class="nav-link active" href="game.html">🎮 Game</a>
+    </div>
+  </nav>
+
+  <!-- ════════ GAME PAGE ════════ -->
+  <div class="game-page fade-in">
+
+    <!-- Header -->
+    <div class="game-header">
+      <div class="game-badge">🎮 Mini Game Coding</div>
+      <h1>Main Game &amp; Basmi Kejenuhan!</h1>
+      <p>
+        Capek baca materi atau latihan soal? Segarkan pikiranmu sejenak dengan permainan interaktif seputar dunia koding.
+      </p>
+
+      <!-- Control Bar & Mode Tabs -->
+      <div class="game-controls-bar">
+        <div class="game-tabs" role="tablist">
+          <button class="game-tab-btn active" data-game="bug" onclick="setGameMode('bug')">
+            🐞 Basmi Bug!
+          </button>
+          <button class="game-tab-btn" data-game="memory" onclick="setGameMode('memory')">
+            🃏 Memory Match
+          </button>
+          <button class="game-tab-btn" data-game="speed" onclick="setGameMode('speed')">
+            ⚡ Tebak Kilat
+          </button>
+        </div>
+
+        <button class="sound-toggle-btn" id="sound-toggle-btn" onclick="SoundFX.toggle()" aria-label="Toggle suara efek game">
+          🔊 Suara: ON
+        </button>
+      </div>
+
+      <!-- Stats Bar -->
+      <div class="game-stats-row">
+        <div class="game-stat-card">
+          <div class="game-stat-label" id="stat-1-label">Skor</div>
+          <div class="game-stat-value highlight" id="stat-1-val">0</div>
+        </div>
+        <div class="game-stat-card">
+          <div class="game-stat-label" id="stat-2-label">Sisa Waktu</div>
+          <div class="game-stat-value" id="stat-2-val">30s</div>
+        </div>
+        <div class="game-stat-card">
+          <div class="game-stat-label" id="stat-3-label">Combo</div>
+          <div class="game-stat-value" id="stat-3-val">0x</div>
+        </div>
+        <div class="game-stat-card">
+          <div class="game-stat-label" id="stat-4-label">Rekor Terbaik</div>
+          <div class="game-stat-value" id="stat-4-val">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Stage (Canvas / Grid Screen) -->
+    <div class="game-screen-wrapper" id="game-stage">
+      <!-- Diisi secara dinamis oleh js/game.js -->
+    </div>
+
+    <!-- Action Links -->
+    <div style="margin-top: 36px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+      <a class="btn btn-outline" href="materi.html">📖 Lanjut Belajar Materi</a>
+      <a class="btn btn-outline" href="kuis.html">✏️ Latihan Kuis (10 Soal)</a>
+    </div>
+
+  </div>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer>
+    &copy; 2026 CodeNexa &nbsp;·&nbsp; Informatika SMA &nbsp;·&nbsp; Developer ArrZzz
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

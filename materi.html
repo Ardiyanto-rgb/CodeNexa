@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Materi — CodeNexa</title>
+  <meta name="description" content="Materi pembelajaran Pemrograman Aplikasi dan Web SMA Kelas X" />
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/materi.css" />
+</head>
+<body>
+
+  <!-- ════════ NAVBAR ════════ -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo" aria-label="CodeNexa Beranda">
+      <img src="img/logo.png" alt="Logo CodeNexa" class="logo-img" />
+      <span class="logo-text">Code<span class="logo-accent">Nexa</span></span>
+    </a>
+    <div class="nav-links" id="nav-links">
+      <a class="nav-link" href="index.html">Beranda</a>
+      <a class="nav-link active" href="materi.html">Materi</a>
+      <a class="nav-link" href="kuis.html">Kuis</a>
+      <a class="nav-link" href="game.html">🎮 Game</a>
+    </div>
+
+    <!-- Tombol Navigasi Mobile (Sejajar Berdampingan) -->
+    <div class="nav-btn-group">
+      <button class="menu-toggle" id="menu-toggle" onclick="toggleNav()" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      <button class="menu-toggle" id="sidebar-toggle" onclick="toggleSidebar()" aria-label="Buka menu bab" style="display:none">☰ Bab</button>
+    </div>
+  </nav>
+
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <div class="layout">
+
+    <!-- ════════ SIDEBAR ════════ -->
+    <aside class="sidebar" id="sidebar" aria-label="Navigasi bab">
+      <div class="sidebar-section-title">Kurikulum</div>
+
+      <button class="sidebar-item active" data-ch="tujuan" onclick="showChapter('tujuan')">
+        <span class="item-num" style="background: linear-gradient(135deg, #2563eb, #06b6d4); color: #fff;">🎯</span>
+        Tujuan Pembelajaran
+      </button>
+
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section-title">Daftar Bab</div>
+
+      <button class="sidebar-item" data-ch="0" onclick="showChapter(0)">
+        <span class="item-num">1</span> Dasar Algoritma &amp; Pemrograman
+      </button>
+      <button class="sidebar-item" data-ch="1" onclick="showChapter(1)">
+        <span class="item-num">2</span> Bagaimana Web Bekerja
+      </button>
+      <button class="sidebar-item" data-ch="2" onclick="showChapter(2)">
+        <span class="item-num">3</span> HTML: Struktur Halaman
+      </button>
+      <button class="sidebar-item" data-ch="3" onclick="showChapter(3)">
+        <span class="item-num">4</span> CSS: Tampilan Halaman
+      </button>
+      <button class="sidebar-item" data-ch="4" onclick="showChapter(4)">
+        <span class="item-num">5</span> JavaScript: Interaktivitas
+      </button>
+      <button class="sidebar-item" data-ch="5" onclick="showChapter(5)">
+        <span class="item-num">6</span> Dari Web ke Aplikasi
+      </button>
+      <button class="sidebar-item" data-ch="6" onclick="showChapter(6)">
+        <span class="item-num">7</span> Etika, Keamanan &amp; Lisensi
+      </button>
+
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-section-title">Latihan &amp; Hiburan</div>
+      <a class="sidebar-item" href="kuis.html" style="color:var(--accent);font-weight:600;">
+        <span class="item-num" style="background:var(--accent);color:#fff">✏️</span>
+        Kuis Interaktif
+      </a>
+      <a class="sidebar-item" href="game.html" style="color:#2563eb;font-weight:600;">
+        <span class="item-num" style="background:#2563eb;color:#fff">🎮</span>
+        Mini Game Seru
+      </a>
+    </aside>
+
+    <!-- ════════ MAIN CONTENT ════════ -->
+    <main class="main-content" id="main-content">
+
+      <!-- ─────────────────── TUJUAN PEMBELAJARAN (BAB 1 - 7) ─────────────────── -->
+      <article class="chapter active" id="chtujuan" aria-labelledby="h1-tujuan">
+        <div class="tp-hero">
+          <span class="chapter-badge">🎯 Capaian Pembelajaran &bull; Informatika SMA Kelas X</span>
+          <h1 id="h1-tujuan">Tujuan Pembelajaran (Bab 1 – 7)</h1>
+          <p class="chapter-lead">
+            Selamat datang di modul pembelajaran pemrograman aplikasi dan web. Sebelum memulai petualangan kodingmu, pahami target dan kompetensi yang akan kamu capai di setiap bab berikut ini.
+          </p>
+        </div>
+
+        <!-- Info Highlights -->
+        <div class="tp-stats-banner">
+          <div class="tp-stat-item">
+            <span class="tp-stat-icon">📚</span>
+            <div>
+              <strong>7 Bab Terstruktur</strong>
+              <span>Dari logika komputasional hingga aplikasi web nyata</span>
+            </div>
+          </div>
+          <div class="tp-stat-item">
+            <span class="tp-stat-icon">💡</span>
+            <div>
+              <strong>Praktik Langsung</strong>
+              <span>Disertai contoh kode, simulasi, kuis, dan mini game</span>
+            </div>
+          </div>
+          <div class="tp-stat-item">
+            <span class="tp-stat-icon">🚀</span>
+            <div>
+              <strong>Kurikulum Merdeka</strong>
+              <span>Fase E (Kelas X SMA) Elemen Algoritma &amp; Pemrograman</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="tp-grid">
+          <!-- Bab 1 -->
+          <div class="tp-card">
+            <div class="tp-card-header">
+              <span class="tp-number-badge">Bab 1</span>
+              <span class="tp-card-icon">🧠</span>
+            </div>
+            <h3>Dasar Algoritma &amp; Pemrograman</h3>
+            <p class="tp-desc">Membangun fondasi logika berpikir komputasional sebelum menulis kode pertamamu.</p>
+            <div class="tp-targets-title">🎯 Sasaran Pembelajaran:</div>
+            <ul class="tp-list">
+              <li>Memahami definisi algoritma serta 5 kriteria algoritma yang baik dan efektif.</li>
+              <li>Mampu membaca dan menyusun representasi logika menggunakan <strong>flowchart</strong> dan <strong>pseudocode</strong>.</li>
+              <li>Menguasai konsep variabel, konstanta, dan tipe data dasar komputer.</li>
+              <li>Menerapkan struktur kontrol logika <strong>percabangan</strong> (if-else) dan <strong>perulangan</strong> (looping).</li>
+              <li>Menerapkan prinsip praktik baik penulisan kode yang bersih, bermakna, dan mudah dipelihara.</li>
+            </ul>
+            <button class="btn btn-sm btn-outline tp-card-btn" onclick="showChapter(0)">Pelajari Bab 1 &rarr;</button>
+          </div>
+
+          <!-- Bab 2 -->
+          <div class="tp-card">
+            <div class="tp-card-header">
+              <span class="tp-number-badge">Bab 2</span>
+              <span class="tp-card-icon">🌐</span>
+            </div>
+            <h3>Bagaimana Web Bekerja</h3>
+            <p class="tp-desc">Menyingkap teknologi jaringan dan infrastruktur di balik internet modern.</p>
+            <div class="tp-targets-title">🎯 Sasaran Pembelajaran:</div>
+            <ul class="tp-list">
+              <li>Menjelaskan arsitektur komputasi <strong>Client &ndash; Server</strong> dalam interaksi web.</li>
+              <li>Memahami alur siklus permintaan dan respons (<strong>Request &ndash; Response cycle</strong>).</li>
+              <li>Menganalisis perbedaan serta tingkat keamanan protokol <strong>HTTP</strong> dan <strong>HTTPS (SSL/TLS)</strong>.</li>
+              <li>Memahami peran <strong>Domain Name System (DNS)</strong> dalam memetakan nama domain ke alamat IP.</li>
+              <li>Membedah anatomi struktur URL (protokol, domain/host, port, path, query string, dan hash).</li>
+            </ul>
+            <button class="btn btn-sm btn-outline tp-card-btn" onclick="showChapter(1)">Pelajari Bab 2 &rarr;</button>
+          </div>
+
+          <!-- Bab 3 -->
+          <div class="tp-card">
+            <div class="tp-card-header">
+              <span class="tp-number-badge">Bab 3</span>
+              <span class="tp-card-icon">🏗️</span>
+            </div>
+            <h3>HTML: Struktur Halaman Web</h3>
+            <p class="tp-desc">Mempelajari kerangka dasar dan semantik dalam membangun konten halaman web.</p>
+            <div class="tp-targets-title">🎯 Sasaran Pembelajaran:</div>
+            <ul class="tp-list">
+              <li>Memahami peran HTML sebagai bahasa markah pembangun struktur web.</li>
+              <li>Menguasai anatomi elemen HTML: tag pembuka, atribut, konten, dan tag penutup.</li>
+              <li>Menyusun dokumen HTML standar lengkap (&lt;!DOCTYPE&gt;, &lt;html&gt;, &lt;head&gt;, &lt;body&gt;).</li>
+              <li>Menggunakan tag-tag esensial: heading, paragraf, tautan (&lt;a&gt;), gambar (&lt;img&gt;), list, dan tabel.</li>
+              <li>Menerapkan <strong>HTML Semantik</strong> (&lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;footer&gt;) untuk aksesibilitas &amp; SEO.</li>
+              <li>Membuat formulir input interaktif (&lt;form&gt;, &lt;input&gt;, &lt;select&gt;, &lt;button&gt;).</li>
+            </ul>
+            <button class="btn btn-sm btn-outline tp-card-btn" onclick="showChapter(2)">Pelajari Bab 3 &rarr;</button>
+          </div>
+
+          <!-- Bab 4 -->
+          <div class="tp-card">
+            <div class="tp-card-header">
+              <span class="tp-number-badge">Bab 4</span>
+              <span class="tp-card-icon">🎨</span>
+            </div>
+            <h3>CSS: Tampilan &amp; Tata Letak</h3>
+            <p class="tp-desc">Menghias, memberi gaya, dan mengatur tata letak antarmuka web yang rapi dan memukau.</p>
+            <div class="tp-targets-title">🎯 Sasaran Pembelajaran:</div>
+            <ul class="tp-list">
+              <li>Memahami 3 metode penerapan CSS (inline, internal, dan external stylesheet).</li>
+              <li>Menguasai selektor dasar: element, class, ID, dan hierarki spesifisitas (*cascade*).</li>
+              <li>Memahami konsep vital <strong>Box Model</strong>: margin, border, padding, dan content.</li>
+              <li>Membangun layout modern satu dimensi yang fleksibel menggunakan <strong>CSS Flexbox</strong>.</li>
+              <li>Menerapkan prinsip <strong>Responsive Web Design</strong> dengan media queries agar ramah di HP dan laptop.</li>
+            </ul>
+            <button class="btn btn-sm btn-outline tp-card-btn" onclick="showChapter(3)">Pelajari Bab 4 &rarr;</button>
+          </div>
+
+          <!-- Bab 5 -->
+          <div class="tp-card">
+            <div class="tp-card-header">
+              <span class="tp-number-badge">Bab 5</span>
+              <span class="tp-card-icon">⚡</span>
+            </div>
+            <h3>JavaScript: Interaktivitas Web</h3>
+            <p class="tp-desc">Menghidupkan halaman web statis agar interaktif dan merespons aksi pengguna secara langsung.</p>
+            <div class="tp-targets-title">🎯 Sasaran Pembelajaran:</div>
+            <ul class="tp-list">
+              <li>Memahami kedudukan JavaScript sebagai bahasa pemrograman interaktif sisi klien (client-side).</li>
+              <li>Mendeklarasikan variabel modern (<code>let</code>, <code>const</code>) dan memahami tipe data di JS.</li>
+              <li>Memanipulasi <strong>Document Object Model (DOM)</strong>: memilih, membaca, dan mengubah elemen HTML.</li>
+              <li>Menangani interaksi pengguna melalui <strong>Event Listener</strong> (<code>click</code>, <code>input</code>, <code>submit</code>).</li>
+              <li>Mampu membangun mini proyek web interaktif (studi kasus aplikasi Todo List).</li>
+            </ul>
+            <button class="btn btn-sm btn-outline tp-card-btn" onclick="showChapter(4)">Pelajari Bab 5 &rarr;</button>
+          </div>
+
+          <!-- Bab 6 -->
+          <div class="tp-card">
+            <div class="tp-card-header">
+              <span class="tp-number-badge">Bab 6</span>
+              <span class="tp-card-icon">📱</span>
+            </div>
+            <h3>Dari Web ke Aplikasi</h3>
+            <p class="tp-desc">Mengenal ekosistem aplikasi modern, REST API, dan kolaborasi kode dengan Git.</p>
+            <div class="tp-targets-title">🎯 Sasaran Pembelajaran:</div>
+            <ul class="tp-list">
+              <li>Membedakan spektrum aplikasi: Web Statis, Web App (SPA), Progressive Web App (PWA), Hybrid, dan Native.</li>
+              <li>Memahami tahapan <strong>Software Development Life Cycle (SDLC)</strong>: analisis, desain, implementasi, uji, rilis.</li>
+              <li>Memahami konsep <strong>REST API</strong> dan pertukaran data format JSON antara Frontend dan Backend.</li>
+              <li>Mengenal fungsi sistem kendali versi (<strong>Git &amp; GitHub</strong>) untuk melacak revisi dan kerja sama tim.</li>
+            </ul>
+            <button class="btn btn-sm btn-outline tp-card-btn" onclick="showChapter(5)">Pelajari Bab 6 &rarr;</button>
+          </div>
+
+          <!-- Bab 7 -->
+          <div class="tp-card">
+            <div class="tp-card-header">
+              <span class="tp-number-badge">Bab 7</span>
+              <span class="tp-card-icon">🛡️</span>
+            </div>
+            <h3>Etika, Keamanan &amp; Lisensi</h3>
+            <p class="tp-desc">Menjadi pengembang berintegritas tinggi, sadar keamanan siber, dan taat hukum lisensi.</p>
+            <div class="tp-targets-title">🎯 Sasaran Pembelajaran:</div>
+            <ul class="tp-list">
+              <li>Mengenali 3 ancaman keamanan web dasar pemula (XSS, SQL Injection, Credential Stuffing) &amp; pencegahannya.</li>
+              <li>Memahami jenis-jenis lisensi kode sumber terbuka (Open Source): MIT, Apache 2.0, GPL, dan hak cipta karya.</li>
+              <li>Menerapkan prinsip etika digital, perlindungan privasi data pengguna, dan pencegahan plagiarisme.</li>
+              <li>Mengetahui peta jalan (*roadmap*) pengembangan keahlian pemrograman lebih lanjut pasca SMA.</li>
+            </ul>
+            <button class="btn btn-sm btn-outline tp-card-btn" onclick="showChapter(6)">Pelajari Bab 7 &rarr;</button>
+          </div>
+        </div>
+
+        <!-- Callout Banner Pembelajaran -->
+        <div class="callout" style="margin-top: 32px; background: #f0fdf4; border-color: #86efac;">
+          <strong style="color: #166534;">💡 Tips Belajar Efektif di CodeNexa:</strong>
+          <span style="color: #15803d;">
+            Pelajari setiap materi secara berurutan, coba langsung contoh kodenya, lalu uji pemahamanmu dengan mengikuti <strong>Kuis Interaktif</strong> dan <strong>Mini Game</strong> di akhir sesi!
+          </span>
+        </div>
+
+        <div class="progress-nav" style="justify-content: flex-end;">
+          <button class="btn btn-primary" onclick="showChapter(0)" style="font-weight: 700; padding: 12px 24px;">
+            Mulai Belajar: Bab 1 &rarr;
+          </button>
+        </div>
+      </article>
+
+      <!-- ─────────────────── BAB 1 ─────────────────── -->
+      <article class="chapter" id="ch0" aria-labelledby="h1-ch0">
+        <span class="chapter-badge">Bab 1</span>
+        <h1 id="h1-ch0">Dasar Algoritma &amp; Pemrograman</h1>
+        <p class="chapter-lead">Pahami cara berpikir terstruktur sebelum menulis kode pertamamu.</p>
+
+        <h2>1.1 Algoritma</h2>
+        <p>
+          <span class="term">Algoritma</span> adalah urutan langkah yang <strong>jelas dan berhingga</strong>
+          untuk menyelesaikan suatu masalah. Contoh sehari-hari: resep memasak, atau langkah mengisi
+          pulsa lewat aplikasi. Algoritma bisa ditulis sebagai kalimat, <span class="term">flowchart</span>,
+          atau <span class="term">pseudocode</span>.
+        </p>
+
+        <div class="callout">
+          <strong>5 Ciri Algoritma yang Baik</strong>
+          Ada <strong>masukan (input)</strong> · ada <strong>keluaran (output)</strong> ·
+          setiap langkah <strong>jelas</strong> · jumlah langkah <strong>berhingga</strong> ·
+          bersifat <strong>efektif</strong> (dapat benar-benar dikerjakan).
+        </div>
+
+        <!-- Flowchart SVG -->
+        <div class="flowchart-wrap">
+          <svg width="210" height="315" viewBox="0 0 210 315" xmlns="http://www.w3.org/2000/svg"
+               font-family="Segoe UI,system-ui,sans-serif" font-size="12.5">
+            <defs>
+              <marker id="arr"  markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#555"/></marker>
+              <marker id="arrG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#2f9e44"/></marker>
+              <marker id="arrR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#e03131"/></marker>
+            </defs>
+            <!-- Mulai -->
+            <ellipse cx="105" cy="30" rx="58" ry="22" fill="#3b5bdb"/>
+            <text x="105" y="35" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">Mulai</text>
+            <line x1="105" y1="52" x2="105" y2="78" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+            <!-- Baca nilai -->
+            <polygon points="105,78 172,110 105,142 38,110" fill="#fff9db" stroke="#e8b108" stroke-width="1.5"/>
+            <text x="105" y="114" text-anchor="middle" fill="#5c3c00" font-weight="600">Baca nilai</text>
+            <line x1="105" y1="142" x2="105" y2="167" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+            <!-- Keputusan -->
+            <polygon points="105,167 176,200 105,233 34,200" fill="#d3f9d8" stroke="#2f9e44" stroke-width="1.5"/>
+            <text x="105" y="196" text-anchor="middle" fill="#1a5c2a" font-weight="700">nilai ≥ 75?</text>
+            <text x="105" y="212" text-anchor="middle" fill="#555" font-size="10">keputusan</text>
+            <!-- Lulus (Ya → kanan) -->
+            <line x1="176" y1="200" x2="200" y2="200" stroke="#2f9e44" stroke-width="1.5"/>
+            <line x1="200" y1="200" x2="200" y2="262" stroke="#2f9e44" stroke-width="1.5"/>
+            <line x1="200" y1="262" x2="158" y2="262" stroke="#2f9e44" stroke-width="1.5" marker-end="url(#arrG)"/>
+            <rect x="104" y="249" width="54" height="24" rx="6" fill="#2f9e44"/>
+            <text x="131" y="265" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">✓ Lulus</text>
+            <text x="186" y="196" fill="#2f9e44" font-size="10" font-weight="700">Ya</text>
+            <!-- Remedial (Tidak → kiri) -->
+            <line x1="34" y1="200" x2="10" y2="200" stroke="#e03131" stroke-width="1.5"/>
+            <line x1="10" y1="200" x2="10" y2="262" stroke="#e03131" stroke-width="1.5"/>
+            <line x1="10" y1="262" x2="52" y2="262" stroke="#e03131" stroke-width="1.5" marker-end="url(#arrR)"/>
+            <rect x="52" y="249" width="54" height="24" rx="6" fill="#e03131"/>
+            <text x="79" y="265" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">✗ Remedial</text>
+            <text x="18" y="196" fill="#e03131" font-size="10" font-weight="700">Tidak</text>
+            <!-- Selesai -->
+            <line x1="105" y1="273" x2="105" y2="293" stroke="#555" stroke-width="1.5" marker-end="url(#arr)"/>
+            <ellipse cx="105" cy="305" rx="58" ry="22" fill="#1a1a2e"/>
+            <text x="105" y="310" text-anchor="middle" fill="#fff" font-weight="700" font-size="13">Selesai</text>
+          </svg>
+          <p class="flowchart-caption">Flowchart: Menentukan Lulus atau Tidak</p>
+        </div>
+
+        <h2>1.2 Pemrograman</h2>
+        <p>
+          <span class="term">Pemrograman</span> adalah proses menuliskan algoritma ke dalam
+          <strong>bahasa pemrograman</strong> agar komputer dapat menjalankannya.
+          Pada Fase E, siswa mempelajari pemrograman prosedural.
+        </p>
+        <p>
+          Python dijalankan oleh <span class="term">interpreter</span> yang membaca kode
+          langkah demi langkah. JavaScript dijalankan oleh mesin di dalam peramban (browser).
+          Keduanya cocok untuk pemula karena kita bisa mencoba kode dan langsung melihat hasilnya.
+        </p>
+
+        <h2>1.3 Konsep Dasar</h2>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Konsep</th><th>Penjelasan</th><th>Contoh Python</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Variabel</strong></td><td>Wadah bernama untuk menyimpan data</td><td><code>nama = "Sari"</code></td></tr>
+              <tr><td><strong>Tipe data</strong></td><td>Bilangan bulat, desimal, teks, benar/salah</td><td><code>umur = 16</code>, <code>tinggi = 1.6</code></td></tr>
+              <tr><td><strong>Operator</strong></td><td>Simbol menghitung atau membandingkan</td><td><code>+ - * / == >=</code></td></tr>
+              <tr><td><strong>Percabangan</strong></td><td>Memilih langkah berdasarkan kondisi</td><td><code>if</code>, <code>else</code></td></tr>
+              <tr><td><strong>Perulangan</strong></td><td>Mengulang langkah</td><td><code>for</code>, <code>while</code></td></tr>
+              <tr><td><strong>Fungsi</strong></td><td>Blok kode yang diberi nama, dapat dipakai ulang</td><td><code>def</code></td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>1.4 Contoh Program Python</h2>
+        <pre><code>def cek_kelulusan(nilai):
+    if nilai >= 75:
+        return "Lulus"
+    else:
+        return "Remedial"
+
+for n in [90, 70, 75]:
+    print(n, "->", cek_kelulusan(n))
+
+# Output:
+# 90 -> Lulus
+# 70 -> Remedial
+# 75 -> Lulus</code></pre>
+
+        <h2>1.5 Praktik Baik Penulisan Program</h2>
+        <ul>
+          <li>Beri nama variabel yang <strong>bermakna</strong> — <code>nilai_akhir</code>, bukan <code>x</code>.</li>
+          <li>Gunakan <strong>indentasi yang konsisten</strong>.</li>
+          <li>Tulis komentar untuk menjelaskan <em>mengapa</em>, bukan sekadar apa.</li>
+          <li>Pecah masalah besar menjadi <strong>fungsi-fungsi kecil</strong>.</li>
+          <li>Uji program dengan beberapa data, termasuk <strong>data batas</strong> (misal nilai 75 tepat).</li>
+        </ul>
+
+        <div class="learning-objectives-box">
+          <div class="lob-header">
+            <span class="lob-icon">🎯</span>
+            <strong>Tujuan Pembelajaran Bab 1:</strong>
+          </div>
+          <ul class="lob-list">
+            <li>Memahami konsep algoritma dan 5 ciri algoritma yang baik &amp; efektif.</li>
+            <li>Membaca dan merancang representasi logika dengan flowchart dan pseudocode.</li>
+            <li>Menguasai variabel, konstanta, dan tipe data dasar komputer.</li>
+            <li>Menerapkan struktur kontrol logika percabangan (if-else) dan perulangan (looping).</li>
+            <li>Menerapkan prinsip praktik baik penulisan kode program.</li>
+          </ul>
+        </div>
+
+        <div class="progress-nav">
+          <button class="btn btn-outline" onclick="showChapter('tujuan')">&larr; Tujuan Pembelajaran</button>
+          <button class="btn btn-primary" onclick="showChapter(1)">Bab 2 &rarr;</button>
+        </div>
+      </article>
+
+      <!-- ─────────────────── BAB 2 ─────────────────── -->
+      <article class="chapter" id="ch1" aria-labelledby="h1-ch1">
+        <span class="chapter-badge">Bab 2</span>
+        <h1 id="h1-ch1">Bagaimana Web Bekerja</h1>
+        <p class="chapter-lead">Pahami infrastruktur di balik setiap halaman yang kamu buka.</p>
+
+        <h2>2.1 Istilah Penting</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Istilah</th><th>Pengertian</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Internet</strong></td><td>Jaringan global yang menghubungkan jutaan perangkat</td></tr>
+              <tr><td><strong>Web</strong></td><td>Salah satu layanan di atas internet (selain email, dll.)</td></tr>
+              <tr><td><strong>Klien</strong></td><td>Peramban (Chrome, Firefox) di perangkat pengguna</td></tr>
+              <tr><td><strong>Server</strong></td><td>Komputer yang menyimpan dan mengirim halaman atau data</td></tr>
+              <tr><td><strong>URL</strong></td><td>Alamat sumber daya, misal <code>https://contoh.sch.id/profil.html</code></td></tr>
+              <tr><td><strong>HTTP/HTTPS</strong></td><td>Protokol komunikasi klien–server; HTTPS menambahkan enkripsi</td></tr>
+              <tr><td><strong>DNS</strong></td><td>Menerjemahkan nama domain menjadi alamat IP</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout orange">
+          <strong>🍽 Analogi Restoran</strong>
+          Pelanggan (klien) memesan lewat pelayan (HTTP), dapur (server) menyiapkan pesanan,
+          lalu diantar kembali sebagai respons.
+        </div>
+
+        <h2>2.2 Alur Permintaan dan Respons</h2>
+        <div class="steps">
+          <div class="step-card">
+            <div class="step-num">1</div>
+            <div class="step-body">
+              <strong>Pengguna mengetik URL atau mengeklik tautan</strong>
+              <p>Peramban tahu halaman apa yang diminta.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">2</div>
+            <div class="step-body">
+              <strong>Peramban menanyakan alamat IP ke DNS</strong>
+              <p>DNS ibarat buku telepon: mengubah nama domain menjadi alamat IP numerik.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">3</div>
+            <div class="step-body">
+              <strong>Peramban mengirim permintaan (request) ke server</strong>
+              <p>Menggunakan protokol HTTP atau HTTPS.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">4</div>
+            <div class="step-body">
+              <strong>Server mengirim respons</strong>
+              <p>Berisi file HTML, CSS, JavaScript, gambar, atau data JSON.</p>
+            </div>
+          </div>
+          <div class="step-card">
+            <div class="step-num">5</div>
+            <div class="step-body">
+              <strong>Peramban membaca dan menampilkan halaman</strong>
+              <p>Merender semua file menjadi tampilan yang kamu lihat.</p>
+            </div>
+          </div>
+        </div>
+
+        <h2>2.3 Front-end vs Back-end</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th></th><th>Front-end</th><th>Back-end</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Berjalan di</strong></td><td>Peramban pengguna</td><td>Server</td></tr>
+              <tr><td><strong>Tugas</strong></td><td>Tampilan &amp; interaksi</td><td>Logika, database, keamanan</td></tr>
+              <tr><td><strong>Teknologi</strong></td><td>HTML, CSS, JavaScript</td><td>Python, PHP, Node.js + database</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="callout green">
+          <strong>💡 Fokus Materi Ini</strong>
+          Kita berfokus pada <strong>front-end</strong> — paling mudah dicoba langsung di peramban
+          tanpa perlu server.
+        </div>
+
+        <div class="learning-objectives-box">
+          <div class="lob-header">
+            <span class="lob-icon">🎯</span>
+            <strong>Tujuan Pembelajaran Bab 2:</strong>
+          </div>
+          <ul class="lob-list">
+            <li>Memahami arsitektur Client &ndash; Server dan alur siklus Request &ndash; Response.</li>
+            <li>Mengetahui perbedaan protokol HTTP vs HTTPS untuk keamanan data internet.</li>
+            <li>Memahami mekanisme kerja Domain Name System (DNS) dalam menerjemahkan domain ke IP.</li>
+            <li>Mengidentifikasi struktur dan anatomi lengkap dari sebuah URL.</li>
+          </ul>
+        </div>
+
+        <div class="progress-nav">
+          <button class="btn btn-outline" onclick="showChapter(0)">← Bab 1</button>
+          <button class="btn btn-primary" onclick="showChapter(2)">Bab 3 →</button>
+        </div>
+      </article>
+
+      <!-- ─────────────────── BAB 3 ─────────────────── -->
+      <article class="chapter" id="ch2" aria-labelledby="h1-ch2">
+        <span class="chapter-badge">Bab 3</span>
+        <h1 id="h1-ch2">HTML: Struktur Halaman</h1>
+        <p class="chapter-lead">HTML adalah bahasa untuk menyusun struktur dan makna isi halaman web.</p>
+
+        <p>
+          HTML memakai <span class="term">elemen</span> yang ditulis dengan <span class="term">tag</span>.
+          Sebuah elemen terdiri atas <strong>tag pembuka</strong>, isi, dan <strong>tag penutup</strong>:
+        </p>
+        <pre><code>&lt;p&gt;Halo, ini paragraf!&lt;/p&gt;</code></pre>
+        <p>Tag dapat memiliki <span class="term">atribut</span> sebagai keterangan tambahan:</p>
+        <pre><code>&lt;a href="profil.html"&gt;Kunjungi Profil&lt;/a&gt;</code></pre>
+
+        <h2>3.1 Kerangka Dasar HTML</h2>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title&gt;Profil Saya&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Halo, saya Sari&lt;/h1&gt;
+    &lt;p&gt;Saya siswa kelas X dan sedang belajar membuat web.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+        <div class="callout">
+          <strong>Fungsi tiap bagian:</strong>
+          <ul style="margin-top:8px;padding-left:18px">
+            <li><code>&lt;!DOCTYPE html&gt;</code> — memberitahu peramban ini dokumen HTML5</li>
+            <li><code>&lt;html lang="id"&gt;</code> — membungkus seluruh halaman, menandai bahasa</li>
+            <li><code>&lt;head&gt;</code> — info yang tidak tampil: charset, viewport, judul tab</li>
+            <li><code>&lt;body&gt;</code> — semua konten yang tampil di halaman</li>
+          </ul>
+        </div>
+
+        <h2>3.2 Elemen yang Sering Dipakai</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Elemen</th><th>Fungsi</th></tr></thead>
+            <tbody>
+              <tr><td><code>&lt;h1&gt; – &lt;h6&gt;</code></td><td>Judul dan subjudul (h1 = paling penting)</td></tr>
+              <tr><td><code>&lt;p&gt;</code></td><td>Paragraf teks</td></tr>
+              <tr><td><code>&lt;a href="..."&gt;</code></td><td>Tautan (hyperlink)</td></tr>
+              <tr><td><code>&lt;img src="..." alt="..."&gt;</code></td><td>Gambar (alt wajib untuk aksesibilitas)</td></tr>
+              <tr><td><code>&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</code></td><td>Daftar tak berurut / berurut</td></tr>
+              <tr><td><code>&lt;table&gt;</code></td><td>Tabel data</td></tr>
+              <tr><td><code>&lt;form&gt;, &lt;input&gt;, &lt;button&gt;</code></td><td>Formulir dan kontrol input</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>3.3 HTML Semantik</h2>
+        <p>Gunakan elemen yang sesuai maknanya — jangan pakai <code>&lt;div&gt;</code> untuk segalanya:</p>
+        <pre><code>&lt;body&gt;
+  &lt;header&gt;&lt;h1&gt;Blog Sekolah&lt;/h1&gt;&lt;/header&gt;
+  &lt;nav&gt;
+    &lt;a href="#berita"&gt;Berita&lt;/a&gt; |
+    &lt;a href="#kontak"&gt;Kontak&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;main&gt;
+    &lt;article id="berita"&gt;
+      &lt;h2&gt;Lomba Robotik&lt;/h2&gt;
+      &lt;p&gt;Tim kami meraih juara pertama.&lt;/p&gt;
+    &lt;/article&gt;
+  &lt;/main&gt;
+  &lt;footer&gt;&amp;copy; 2026 SMA Contoh&lt;/footer&gt;
+&lt;/body&gt;</code></pre>
+        <div class="callout green">
+          <strong>Kenapa semantik penting?</strong>
+          Membantu <strong>pembaca layar (screen reader)</strong>, <strong>mesin pencari (SEO)</strong>,
+          dan mempermudah pemeliharaan kode jangka panjang.
+        </div>
+
+        <div class="learning-objectives-box">
+          <div class="lob-header">
+            <span class="lob-icon">🎯</span>
+            <strong>Tujuan Pembelajaran Bab 3:</strong>
+          </div>
+          <ul class="lob-list">
+            <li>Memahami peran HTML dan sintaks dasar elemen (tag pembuka, atribut, konten, tag penutup).</li>
+            <li>Menyusun dokumen HTML standar yang valid dan terstruktur rapi.</li>
+            <li>Menggunakan tag-tag esensial: teks, heading, hyperlink, gambar, list, dan tabel.</li>
+            <li>Menerapkan tag HTML Semantik dan membuat formulir web sederhana.</li>
+          </ul>
+        </div>
+
+        <div class="progress-nav">
+          <button class="btn btn-outline" onclick="showChapter(1)">← Bab 2</button>
+          <button class="btn btn-primary" onclick="showChapter(3)">Bab 4 →</button>
+        </div>
+      </article>
+
+      <!-- ─────────────────── BAB 4 ─────────────────── -->
+      <article class="chapter" id="ch3" aria-labelledby="h1-ch3">
+        <span class="chapter-badge">Bab 4</span>
+        <h1 id="h1-ch3">CSS: Tampilan Halaman</h1>
+        <p class="chapter-lead">CSS mengatur warna, huruf, jarak, dan tata letak halaman web.</p>
+
+        <p>
+          <span class="term">CSS</span> (Cascading Style Sheets) dipisahkan dari HTML
+          agar kode lebih rapi dan mudah dikelola.
+        </p>
+
+        <h2>4.1 Cara Memakai CSS</h2>
+        <pre><code>&lt;!-- Di dalam &lt;head&gt; --&gt;
+&lt;link rel="stylesheet" href="gaya.css"&gt;</code></pre>
+
+        <h2>4.2 Aturan CSS</h2>
+        <pre><code>body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f5f7fa;
+  color: #222;
+}
+
+h1 { color: #0b5ed7; }
+
+.kartu {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+}</code></pre>
+
+        <p>Bentuk aturan: <code>selektor { properti: nilai; }</code></p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Selektor</th><th>Contoh</th><th>Memengaruhi</th></tr></thead>
+            <tbody>
+              <tr><td>Elemen</td><td><code>h1</code></td><td>Semua elemen &lt;h1&gt;</td></tr>
+              <tr><td>Kelas</td><td><code>.kartu</code></td><td>Semua elemen ber-class="kartu"</td></tr>
+              <tr><td>ID</td><td><code>#judul</code></td><td>Satu elemen ber-id="judul"</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h2>4.3 Konsep Penting</h2>
+
+        <h3>Box Model</h3>
+        <div class="callout">
+          <strong>Lapisan dari dalam ke luar:</strong>
+          <strong>Konten</strong> → <strong>Padding</strong> (ruang dalam) →
+          <strong>Border</strong> (garis tepi) → <strong>Margin</strong> (ruang luar)
+        </div>
+
+        <h3>Flexbox &amp; Grid</h3>
+        <ul>
+          <li><span class="term">Flexbox</span> — menata elemen dalam satu baris atau kolom</li>
+          <li><span class="term">Grid</span> — tata letak dua dimensi (baris dan kolom)</li>
+        </ul>
+        <pre><code>.daftar {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 600px) {
+  .daftar {
+    flex-direction: column;
+  }
+}</code></pre>
+
+        <h3>Responsif dengan Media Query</h3>
+        <p>
+          Gunakan satuan relatif (<code>%</code>, <code>rem</code>) dan
+          <span class="term">media query</span> agar halaman nyaman di semua ukuran layar.
+        </p>
+
+        <div class="callout orange">
+          <strong>⚠️ Aksesibilitas Warna</strong>
+          Pastikan kontras teks dan latar cukup tinggi.
+          Jangan menyampaikan informasi hanya lewat warna.
+        </div>
+
+        <div class="learning-objectives-box">
+          <div class="lob-header">
+            <span class="lob-icon">🎯</span>
+            <strong>Tujuan Pembelajaran Bab 4:</strong>
+          </div>
+          <ul class="lob-list">
+            <li>Memahami cara kerja CSS dan penerapan selektor (elemen, class, ID).</li>
+            <li>Menguasai konsep Box Model (margin, border, padding, content) dalam tata letak web.</li>
+            <li>Mendesain tata letak antarmuka fleksibel menggunakan CSS Flexbox.</li>
+            <li>Menerapkan Responsive Web Design dengan media queries agar nyaman di berbagai perangkat.</li>
+          </ul>
+        </div>
+
+        <div class="progress-nav">
+          <button class="btn btn-outline" onclick="showChapter(2)">← Bab 3</button>
+          <button class="btn btn-primary" onclick="showChapter(4)">Bab 5 →</button>
+        </div>
+      </article>
+
+      <!-- ─────────────────── BAB 5 ─────────────────── -->
+      <article class="chapter" id="ch4" aria-labelledby="h1-ch4">
+        <span class="chapter-badge">Bab 5</span>
+        <h1 id="h1-ch4">JavaScript: Membuat Halaman Interaktif</h1>
+        <p class="chapter-lead">JavaScript membuat halaman bereaksi terhadap pengguna.</p>
+
+        <p>
+          JavaScript berjalan di peramban. Konsepnya sama seperti Bab 1
+          (variabel, kondisi, perulangan, fungsi), hanya dengan sintaks yang berbeda.
+        </p>
+
+        <h2>5.1 Padanan Konsep Python → JavaScript</h2>
+        <pre><code>let nama = "Sari";       // variabel (bisa berubah)
+const batas = 75;        // konstanta (tetap)
+
+function cekLulus(nilai) {    // fungsi
+  if (nilai >= batas) {        // percabangan
+    return "Lulus";
+  }
+  return "Remedial";
+}
+
+for (let i = 1; i &lt;= 5; i++) {  // perulangan
+  console.log(i);
+}</code></pre>
+
+        <div class="callout">
+          <strong>Python vs JavaScript — Perbedaan Utama:</strong>
+          <ul style="margin-top:8px;padding-left:18px">
+            <li>Blok kode pakai <code>{ }</code> (bukan indentasi)</li>
+            <li>Setiap pernyataan diakhiri <code>;</code></li>
+            <li>Sama-dengan pakai <code>===</code>, bukan <code>==</code></li>
+            <li>Deklarasi variabel: <code>let</code> (bisa berubah) atau <code>const</code> (tetap)</li>
+          </ul>
+        </div>
+
+        <h2>5.2 DOM dan Event</h2>
+        <p>
+          <span class="term">DOM</span> (Document Object Model) adalah representasi halaman HTML
+          sebagai objek yang bisa diubah oleh JavaScript.
+          <span class="term">Event</span> adalah kejadian seperti klik, pengetikan, atau scroll.
+        </p>
+        <pre><code>&lt;input id="nilai" type="number" placeholder="Masukkan nilai"&gt;
+&lt;button id="cek"&gt;Cek&lt;/button&gt;
+&lt;p id="hasil"&gt;&lt;/p&gt;
+
+&lt;script&gt;
+  const tombol = document.getElementById("cek");
+
+  tombol.addEventListener("click", function() {
+    const nilai  = Number(document.getElementById("nilai").value);
+    const hasil  = nilai >= 75 ? "Lulus" : "Remedial";
+    document.getElementById("hasil").textContent = hasil;
+  });
+&lt;/script&gt;</code></pre>
+
+        <div class="steps">
+          <div class="step-card"><div class="step-num">1</div><div class="step-body"><strong><code>getElementById()</code></strong><p>Mengambil elemen dari DOM berdasarkan atribut id-nya.</p></div></div>
+          <div class="step-card"><div class="step-num">2</div><div class="step-body"><strong><code>addEventListener("click", ...)</code></strong><p>Mendaftarkan fungsi yang berjalan saat tombol diklik.</p></div></div>
+          <div class="step-card"><div class="step-num">3</div><div class="step-body"><strong><code>.value</code> &amp; <code>Number()</code></strong><p>Mengambil isi input (selalu string) lalu mengubahnya menjadi angka.</p></div></div>
+          <div class="step-card"><div class="step-num">4</div><div class="step-body"><strong>Operator ternary <code>? :</code></strong><p>Singkatan if-else untuk satu baris: <code>kondisi ? jika_ya : jika_tidak</code></p></div></div>
+          <div class="step-card"><div class="step-num">5</div><div class="step-body"><strong><code>.textContent</code></strong><p>Menulis teks ke elemen — lebih aman dari <code>innerHTML</code> (mencegah XSS).</p></div></div>
+        </div>
+
+        <h2>5.3 Menyimpan Data Sederhana</h2>
+        <p>
+          Peramban menyediakan <span class="term">localStorage</span> untuk menyimpan data kecil
+          di perangkat pengguna tanpa server.
+        </p>
+        <div class="callout orange">
+          <strong>⚠️ Perhatian</strong>
+          Data di <code>localStorage</code> tidak terenkripsi.
+          Jangan simpan kata sandi atau data pribadi sensitif di sana!
+        </div>
+
+        <h2>5.4 Debugging</h2>
+        <ul>
+          <li>Buka konsol peramban dengan <kbd>F12</kbd></li>
+          <li>Gunakan <code>console.log()</code> untuk memeriksa nilai variabel</li>
+          <li>Uji sedikit demi sedikit — jangan tulis banyak kode sebelum menjalankannya</li>
+        </ul>
+
+        <div class="learning-objectives-box">
+          <div class="lob-header">
+            <span class="lob-icon">🎯</span>
+            <strong>Tujuan Pembelajaran Bab 5:</strong>
+          </div>
+          <ul class="lob-list">
+            <li>Memahami sintaks dasar JavaScript, deklarasi variabel modern, dan tipe data.</li>
+            <li>Memanipulasi Document Object Model (DOM) untuk mengubah elemen halaman web.</li>
+            <li>Menggunakan Event Listener untuk menangani interaksi pengguna (klik, input form).</li>
+            <li>Membangun logika mini aplikasi interaktif (studi kasus Todo List).</li>
+          </ul>
+        </div>
+
+        <div class="progress-nav">
+          <button class="btn btn-outline" onclick="showChapter(3)">← Bab 4</button>
+          <button class="btn btn-primary" onclick="showChapter(5)">Bab 6 →</button>
+        </div>
+      </article>
+
+      <!-- ─────────────────── BAB 6 ─────────────────── -->
+      <article class="chapter" id="ch5" aria-labelledby="h1-ch5">
+        <span class="chapter-badge">Bab 6</span>
+        <h1 id="h1-ch5">Dari Web ke Aplikasi</h1>
+        <p class="chapter-lead">Pahami jenis aplikasi dan tahapan pengembangan perangkat lunak.</p>
+
+        <h2>6.1 Jenis Aplikasi</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Jenis</th><th>Ciri</th><th>Contoh</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Aplikasi desktop</strong></td><td>Dipasang di komputer</td><td>Pengolah kata, editor kode</td></tr>
+              <tr><td><strong>Aplikasi seluler (native)</strong></td><td>Dari toko aplikasi, akses fitur perangkat</td><td>Aplikasi perbankan</td></tr>
+              <tr><td><strong>Aplikasi web</strong></td><td>Lewat peramban, tanpa instalasi</td><td>Gmail, Google Docs</td></tr>
+              <tr><td><strong>PWA</strong></td><td>Aplikasi web yang bisa dipasang, sebagian offline</td><td>Beberapa app berita &amp; belanja</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="callout green">
+          <strong>💡 Koneksi ke Bab Sebelumnya</strong>
+          HTML, CSS, dan JavaScript juga menjadi dasar banyak framework pembuatan aplikasi lintas platform!
+        </div>
+
+        <h2>6.2 Tahapan Pengembangan Aplikasi</h2>
+        <div class="steps">
+          <div class="step-card"><div class="step-num">1</div><div class="step-body"><strong>Analisis Kebutuhan</strong><p>Siapa penggunanya? Masalah apa yang diselesaikan?</p></div></div>
+          <div class="step-card"><div class="step-num">2</div><div class="step-body"><strong>Perancangan</strong><p>Sketsa tampilan (wireframe), alur penggunaan, dan struktur data.</p></div></div>
+          <div class="step-card"><div class="step-num">3</div><div class="step-body"><strong>Implementasi</strong><p>Menulis kode berdasarkan rancangan.</p></div></div>
+          <div class="step-card"><div class="step-num">4</div><div class="step-body"><strong>Pengujian</strong><p>Mencoba aplikasi, mencatat dan memperbaiki bug.</p></div></div>
+          <div class="step-card"><div class="step-num">5</div><div class="step-body"><strong>Peluncuran &amp; Pemeliharaan</strong><p>Publikasi, kumpulkan feedback, perbaiki secara berkala.</p></div></div>
+        </div>
+        <div class="callout orange">
+          <strong>🔄 Proses Iteratif</strong>
+          Tahapan ini berulang — umpan balik pengguna sering membawa tim kembali ke perancangan.
+        </div>
+
+        <h2>6.3 Prinsip Dasar UI/UX</h2>
+        <ul>
+          <li><strong>Konsisten</strong> — tombol dan menu berperilaku serupa di semua halaman</li>
+          <li><strong>Sederhana</strong> — satu layar, satu tujuan utama</li>
+          <li><strong>Umpan balik jelas</strong> — pengguna tahu apakah aksinya berhasil atau gagal</li>
+          <li><strong>Inklusif</strong> — teks terbaca, kontras cukup, dapat digunakan dengan keyboard</li>
+        </ul>
+
+        <div class="learning-objectives-box">
+          <div class="lob-header">
+            <span class="lob-icon">🎯</span>
+            <strong>Tujuan Pembelajaran Bab 6:</strong>
+          </div>
+          <ul class="lob-list">
+            <li>Membedakan arsitektur aplikasi: Web Statis, Web App, PWA, Hybrid, dan Native.</li>
+            <li>Memahami tahapan siklus hidup Software Development Life Cycle (SDLC).</li>
+            <li>Mengenal fungsi REST API dalam menghubungkan frontend dan backend.</li>
+            <li>Mengenal konsep dasar Git dan version control untuk kolaborasi programmer.</li>
+          </ul>
+        </div>
+
+        <div class="progress-nav">
+          <button class="btn btn-outline" onclick="showChapter(4)">← Bab 5</button>
+          <button class="btn btn-primary" onclick="showChapter(6)">Bab 7 →</button>
+        </div>
+      </article>
+
+      <!-- ─────────────────── BAB 7 ─────────────────── -->
+      <article class="chapter" id="ch6" aria-labelledby="h1-ch6">
+        <span class="chapter-badge">Bab 7</span>
+        <h1 id="h1-ch6">Etika, Keamanan &amp; Lisensi</h1>
+        <p class="chapter-lead">Menjadi programmer yang bertanggung jawab dimulai dari sini.</p>
+
+        <h2>Hak Cipta &amp; Lisensi</h2>
+        <p>
+          Gambar, huruf, dan kode milik orang lain punya aturan pemakaian.
+          Cantumkan sumber dan gunakan materi berlisensi terbuka bila memungkinkan.
+        </p>
+
+        <h2>Data Pribadi</h2>
+        <p>
+          Hanya kumpulkan data yang benar-benar diperlukan dan jelaskan kegunaannya kepada pengguna.
+          Pelajari <span class="term">UU Pelindungan Data Pribadi</span> Indonesia.
+        </p>
+
+        <h2>Keamanan Dasar</h2>
+        <ul>
+          <li>Jangan percaya input pengguna begitu saja — selalu <span class="term">validasi input</span></li>
+          <li>Gunakan <strong>HTTPS</strong> untuk koneksi terenkripsi</li>
+          <li>Jangan taruh kata sandi atau kunci rahasia di kode yang terlihat di peramban</li>
+        </ul>
+
+        <h2>Integritas Akademik</h2>
+        <p>
+          Boleh belajar dari contoh kode, tetapi <strong>pahami dan tulis ulang</strong>
+          dengan kata-katamu sendiri. Jika memakai bantuan AI, sebutkan dan pastikan kamu
+          memahami hasilnya.
+        </p>
+
+        <h2>Dampak Sosial</h2>
+        <div class="callout orange">
+          <strong>🤔 Pikirkan juga:</strong>
+          Siapa yang mungkin tidak bisa memakai aplikasimu?
+          Penyandang disabilitas, pengguna jaringan lambat, atau pengguna perangkat lama?
+        </div>
+
+        <div class="learning-objectives-box">
+          <div class="lob-header">
+            <span class="lob-icon">🎯</span>
+            <strong>Tujuan Pembelajaran Bab 7:</strong>
+          </div>
+          <ul class="lob-list">
+            <li>Memahami ancaman keamanan siber dasar web (XSS, SQL Injection, Credential Stuffing).</li>
+            <li>Mengenal lisensi software dan open-source (MIT, Apache, GPL, Hak Cipta).</li>
+            <li>Menerapkan etika pemrograman, perlindungan privasi data, dan anti-plagiarisme.</li>
+            <li>Mengenal roadmap dan jalur karier programmer di masa depan.</li>
+          </ul>
+        </div>
+
+        <div class="progress-nav">
+          <button class="btn btn-outline" onclick="showChapter(5)">← Bab 6</button>
+          <a class="btn btn-primary" href="kuis.html">✏️ Latihan Kuis →</a>
+        </div>
+      </article>
+
+    </main>
+  </div>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer>
+    &copy; 2026 CodeNexa &nbsp;·&nbsp; Informatika SMA &nbsp;·&nbsp; Developer ArrZzz
+  </footer>
+
+  <script src="js/app.js"></script>
+  <script src="js/materi.js"></script>
+
+  <!-- Sidebar toggle untuk mobile -->
+  <script>
+    // Show sidebar-toggle button only on mobile
+    const sidebarToggleBtn = document.getElementById('sidebar-toggle');
+    function checkMobile() {
+      if (window.innerWidth <= 768) {
+        sidebarToggleBtn.style.display = 'inline-flex';
+      } else {
+        sidebarToggleBtn.style.display = 'none';
+        closeSidebar();
+      }
+    }
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+  </script>
+</body>
+</html>

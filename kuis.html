@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kuis Interaktif 10 Soal — CodeNexa</title>
+  <meta name="description" content="Kuis evaluasi 10 soal interaktif Pemrograman Aplikasi dan Web SMA Kelas X" />
+  <link rel="icon" type="image/png" href="img/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/kuis.css" />
+</head>
+<body>
+
+  <!-- ════════ NAVBAR ════════ -->
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo" aria-label="CodeNexa Beranda">
+      <img src="img/logo.png" alt="Logo CodeNexa" class="logo-img" />
+      <span class="logo-text">Code<span class="logo-accent">Nexa</span></span>
+    </a>
+    <button class="menu-toggle" id="menu-toggle" onclick="toggleNav()" aria-label="Toggle menu" aria-expanded="false">☰</button>
+    <div class="nav-links" id="nav-links">
+      <a class="nav-link" href="index.html">Beranda</a>
+      <a class="nav-link" href="materi.html">Materi</a>
+      <a class="nav-link active" href="kuis.html">Kuis</a>
+      <a class="nav-link" href="game.html">🎮 Game</a>
+    </div>
+  </nav>
+
+  <!-- ════════ KUIS PAGE ════════ -->
+  <div class="kuis-page">
+
+    <!-- Header -->
+    <div class="kuis-page-header fade-in">
+      <span class="badge">✏️ Evaluasi 10 Soal</span>
+      <h1>Kuis Interaktif Pemrograman</h1>
+      <p>
+        Uji pemahamanmu melalui <strong>10 soal pilihan ganda</strong>. Soal diacak langsung dari bank soal lengkap — tekan <strong>Acak 10 Soal Baru</strong> kapan saja untuk mencoba variasi soal berbeda!
+      </p>
+
+      <!-- Stats Bar -->
+      <div class="stats-bar">
+        <div class="stat-card">
+          <span class="stat-icon">📝</span>
+          <div>
+            <div class="stat-label">Jumlah Soal</div>
+            <div class="stat-value">10 Soal</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">✅</span>
+          <div>
+            <div class="stat-label">Soal Dijawab</div>
+            <div class="stat-value" id="stat-answered">0 / 10</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">🎯</span>
+          <div>
+            <div class="stat-label">Skor Benar</div>
+            <div class="stat-value" id="stat-score">0 / 10</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-icon">⭐</span>
+          <div>
+            <div class="stat-label">Nilai Akhir</div>
+            <div class="stat-value" id="stat-grade">0</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- Tab Filter / Pemilihan Kategori -->
+    <div class="tab-row" id="tab-row" role="tablist">
+      <button class="tab-btn active" data-tab="gabungan" onclick="switchCategory('gabungan')">🎯 Semua Materi (10 Soal)</button>
+      <button class="tab-btn" data-tab="bab1" onclick="switchCategory('bab1')">Bab 1: Algoritma</button>
+      <button class="tab-btn" data-tab="bab2" onclick="switchCategory('bab2')">Bab 2: Cara Kerja Web</button>
+      <button class="tab-btn" data-tab="bab3" onclick="switchCategory('bab3')">Bab 3: HTML</button>
+      <button class="tab-btn" data-tab="bab4" onclick="switchCategory('bab4')">Bab 4: CSS</button>
+      <button class="tab-btn" data-tab="bab5" onclick="switchCategory('bab5')">Bab 5: JavaScript</button>
+      <button class="tab-btn" data-tab="bab6" onclick="switchCategory('bab6')">Bab 6: Web App</button>
+      <button class="tab-btn" data-tab="bab7" onclick="switchCategory('bab7')">Bab 7: Etika &amp; Keamanan</button>
+    </div>
+
+    <!-- ─── Quiz Session Block (10 Soal) ─── -->
+    <div id="quiz-active-block"></div>
+
+    <!-- Back to Materi & Go to Game -->
+    <div class="quiz-bottom-nav" style="margin-top: 40px; display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;">
+      <a class="btn btn-outline" href="materi.html">← Kembali ke Materi</a>
+      <a class="btn btn-primary" href="game.html" style="display: inline-flex; align-items: center; gap: 8px;">
+        <span>🎮</span>
+        <span>Lanjut Main Mini Game &rarr;</span>
+      </a>
+    </div>
+
+  </div>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer>
+    &copy; 2026 CodeNexa &nbsp;·&nbsp; Informatika SMA &nbsp;·&nbsp; Developer ArrZzz
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/app.js"></script>
+  <script src="js/quiz-data.js"></script>
+  <script src="js/quiz.js"></script>
+  <script>
+    const BAB_TITLES = {
+      'gabungan': 'Kuis 10 Soal — Gabungan Semua Materi',
+      'bab1':     'Kuis 10 Soal — Bab 1: Dasar Algoritma & Pemrograman',
+      'bab2':     'Kuis 10 Soal — Bab 2: Bagaimana Web Bekerja',
+      'bab3':     'Kuis 10 Soal — Bab 3: HTML — Struktur Halaman Web',
+      'bab4':     'Kuis 10 Soal — Bab 4: CSS — Tampilan & Tata Letak',
+      'bab5':     'Kuis 10 Soal — Bab 5: JavaScript — Interaktivitas Web',
+      'bab6':     'Kuis 10 Soal — Bab 6: Dari Web ke Aplikasi',
+      'bab7':     'Kuis 10 Soal — Bab 7: Etika, Keamanan & Lisensi'
+    };
+
+    function switchCategory(key) {
+      // Update tab aktif
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === key);
+      });
+
+      const pool  = key === 'gabungan' ? ALL_QUESTIONS : (QUIZ_DATA[key] || ALL_QUESTIONS);
+      const title = BAB_TITLES[key] || 'Kuis 10 Soal Interaktif';
+
+      ActiveQuiz.init(pool, title, key);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Default: 10 Soal Gabungan dari Semua Materi
+      switchCategory('gabungan');
+    });
+  </script>
+</body>
+</html>
