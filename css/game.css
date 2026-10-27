@@ -172,19 +172,27 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .bug-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
-  max-width: 480px;
   width: 100%;
-  margin: 16px auto;
+  max-width: 420px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .bug-hole {
   aspect-ratio: 1;
+  width: 100%;
+  min-width: 0;
   background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
   border-radius: 16px;
   position: relative;
@@ -197,6 +205,8 @@
   justify-content: center;
   user-select: none;
   -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  box-sizing: border-box;
 }
 
 .bug-hole::before {
@@ -207,25 +217,28 @@
   color: #475569;
   bottom: 8px;
   opacity: 0.4;
+  pointer-events: none;
 }
 
 .bug-character {
-  font-size: 2.8rem;
+  font-size: 2.6rem;
   position: absolute;
-  bottom: -60px;
-  transition: bottom 0.18s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-  pointer-events: auto;
+  transform: translateY(140%);
+  transition: transform 0.18s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+  pointer-events: none;
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+  line-height: 1;
+  user-select: none;
 }
 
 .bug-hole.up .bug-character {
-  bottom: 18px;
+  transform: translateY(0);
   animation: bugWiggle 0.4s infinite alternate ease-in-out;
 }
 
 @keyframes bugWiggle {
-  from { transform: rotate(-8deg); }
-  to   { transform: rotate(8deg); }
+  from { transform: translateY(0) rotate(-8deg); }
+  to   { transform: translateY(0) rotate(8deg); }
 }
 
 .bug-hole.whacked .bug-character {
@@ -233,9 +246,9 @@
 }
 
 @keyframes bugSquish {
-  0%   { transform: scale(1.2); }
-  50%  { transform: scale(0.6) rotate(20deg); opacity: 0.8; }
-  100% { bottom: -60px; opacity: 0; }
+  0%   { transform: translateY(0) scale(1.2); }
+  50%  { transform: translateY(0) scale(0.6) rotate(20deg); opacity: 0.8; }
+  100% { transform: translateY(140%) scale(0.4); opacity: 0; }
 }
 
 /* Floating Points Particle */
@@ -653,8 +666,18 @@
     font-size: 0.58rem;
     padding: 1px 2px;
   }
+  .bug-game-container {
+    max-width: 320px;
+  }
   .bug-grid {
     gap: 10px;
+    max-width: 300px;
+  }
+  .bug-hole {
+    border-radius: 12px;
+  }
+  .bug-character {
+    font-size: 2.1rem;
   }
   .speed-options-grid {
     grid-template-columns: 1fr;
@@ -709,5 +732,15 @@
   }
   .card-text.is-code {
     font-size: 0.52rem;
+  }
+  .bug-game-container {
+    max-width: 270px;
+  }
+  .bug-grid {
+    gap: 8px;
+    max-width: 260px;
+  }
+  .bug-character {
+    font-size: 1.7rem;
   }
 }

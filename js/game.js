@@ -130,7 +130,7 @@ const BugSmasher = {
       <div class="bug-game-container">
         <div class="bug-grid" id="bug-grid">
           ${Array(9).fill(0).map((_, i) => `
-            <div class="bug-hole" id="hole-${i}" onclick="BugSmasher.whack(${i}, event)">
+            <div class="bug-hole" id="hole-${i}" role="button" tabindex="0" onclick="BugSmasher.whack(${i}, event)" onkeydown="if(event.key==='Enter'||event.key===' ')BugSmasher.whack(${i}, event)" aria-label="Lubang bug ${i + 1}">
               <div class="bug-character" id="bug-${i}">🐞</div>
             </div>
           `).join('')}
@@ -196,10 +196,16 @@ const BugSmasher = {
   whack(idx, e) {
     if (!this.isPlaying) return;
     const hole = document.getElementById(`hole-${idx}`);
-    if (!hole.classList.contains('up') || hole.classList.contains('whacked')) return;
+    if (!hole || !hole.classList.contains('up') || hole.classList.contains('whacked')) return;
 
     hole.classList.add('whacked');
     hole.classList.remove('up');
+
+    clearTimeout(this.peepTimeout);
+    this.peepTimeout = setTimeout(() => {
+      hole.classList.remove('whacked');
+      if (this.isPlaying) this.peep();
+    }, 280);
 
     const type = hole.dataset.type || 'normal';
     let pts = 10;
