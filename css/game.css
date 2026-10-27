@@ -7,6 +7,9 @@
   max-width: 880px;
   margin: 0 auto;
   padding: 32px 24px 60px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 /* ─── Header ─── */
@@ -151,13 +154,17 @@
   background: #ffffff;
   border: 1px solid #e2e8f0;
   border-radius: 20px;
-  padding: 28px;
+  padding: 28px 20px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
   position: relative;
   min-height: 440px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 /* ════════ GAME 1: BUG SMASHER ════════ */
@@ -255,23 +262,46 @@
 /* ════════ GAME 2: MEMORY MATCH ════════ */
 .memory-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 14px;
-  max-width: 580px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  max-width: 520px;
   width: 100%;
-  margin: 16px auto;
+  margin: 0 auto;
   perspective: 1000px;
+  box-sizing: border-box;
 }
 
 .memory-card {
   aspect-ratio: 1;
+  width: 100%;
+  min-width: 0;
+  position: relative;
+  cursor: pointer;
   background: transparent;
   border: none;
-  cursor: pointer;
-  position: relative;
+  padding: 0;
+  margin: 0;
+  border-radius: 14px;
   transform-style: preserve-3d;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease;
   user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.memory-card:focus-visible {
+  outline: 2px solid #2563eb;
+  outline-offset: 3px;
+}
+
+.memory-card.preview-card {
+  pointer-events: none;
+  opacity: 0.75;
+}
+
+.memory-card:hover:not(.flipped):not(.matched):not(.preview-card) {
+  transform: translateY(-2px);
 }
 
 .memory-card.flipped {
@@ -281,7 +311,26 @@
 .memory-card.matched .card-front {
   background: #ecfdf5;
   border-color: #10b981;
-  box-shadow: 0 0 16px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
+  animation: matchPop 0.35s ease;
+}
+
+.memory-card.mismatch .card-front {
+  border-color: #ef4444;
+  background: #fef2f2;
+  animation: cardWiggle 0.35s ease;
+}
+
+@keyframes matchPop {
+  0%   { transform: rotateY(180deg) scale(0.92); }
+  50%  { transform: rotateY(180deg) scale(1.06); }
+  100% { transform: rotateY(180deg) scale(1); }
+}
+
+@keyframes cardWiggle {
+  0%, 100% { transform: rotateY(180deg) translateX(0); }
+  25%      { transform: rotateY(180deg) translateX(-4px); }
+  75%      { transform: rotateY(180deg) translateX(4px); }
 }
 
 .card-face {
@@ -292,36 +341,64 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 8px 6px;
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   border: 2px solid #e2e8f0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  box-sizing: border-box;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 .card-back {
   background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
   color: #ffffff;
-  font-size: 1.6rem;
+  font-size: 1.45rem;
   font-weight: 800;
+  letter-spacing: -0.02em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  border-color: #3b82f6;
 }
 
 .card-front {
   background: #ffffff;
   transform: rotateY(180deg);
   text-align: center;
+  gap: 4px;
 }
 
 .card-icon {
-  font-size: 1.7rem;
-  margin-bottom: 4px;
+  font-size: 1.6rem;
+  line-height: 1;
+  display: block;
+  user-select: none;
 }
 
 .card-text {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 700;
   color: #0f172a;
-  line-height: 1.2;
+  line-height: 1.25;
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+  box-sizing: border-box;
+}
+
+.card-text.is-code {
+  font-family: 'Consolas', 'Fira Code', monospace;
+  font-size: 0.74rem;
+  color: #1d4ed8;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 4px;
+  padding: 1px 4px;
+  display: inline-block;
+  max-width: 100%;
 }
 
 /* ════════ GAME 3: SPEED CODE ════════ */
@@ -479,26 +556,158 @@
 }
 
 /* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .memory-grid {
+    gap: 10px;
+    max-width: 480px;
+  }
+  .card-icon {
+    font-size: 1.45rem;
+  }
+  .card-text {
+    font-size: 0.74rem;
+  }
+  .card-text.is-code {
+    font-size: 0.7rem;
+  }
+}
+
 @media (max-width: 600px) {
   .game-page {
-    padding: 20px 14px 40px;
+    padding: 18px 12px 40px;
+  }
+  .game-controls-bar {
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .game-tabs {
+    width: 100%;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+  .game-tab-btn {
+    padding: 8px 6px;
+    font-size: 0.78rem;
+    justify-content: center;
+    text-align: center;
+    white-space: nowrap;
+    border-radius: 10px;
+  }
+  .sound-toggle-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 7px 12px;
+    font-size: 0.8rem;
   }
   .game-stats-row {
     grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .game-stat-card {
+    padding: 8px 10px;
+    border-radius: 10px;
+  }
+  .game-stat-label {
+    font-size: 0.68rem;
+  }
+  .game-stat-value {
+    font-size: 1.18rem;
+  }
+  .game-screen-wrapper {
+    padding: 12px 8px;
+    border-radius: 16px;
+    min-height: 360px;
+  }
+  .memory-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 6px;
+    max-width: 100%;
+    width: 100%;
+  }
+  .memory-card {
+    border-radius: 10px;
+  }
+  .card-face {
+    border-radius: 10px;
+    padding: 4px 2px;
+    border-width: 1.5px;
+  }
+  .card-back {
+    font-size: 1.15rem;
+  }
+  .card-front {
+    gap: 2px;
+  }
+  .card-icon {
+    font-size: 1.2rem;
+  }
+  .card-text {
+    font-size: 0.62rem;
+    line-height: 1.15;
+  }
+  .card-text.is-code {
+    font-size: 0.58rem;
+    padding: 1px 2px;
   }
   .bug-grid {
     gap: 10px;
   }
-  .memory-grid {
-    gap: 8px;
-  }
-  .card-icon {
-    font-size: 1.3rem;
-  }
-  .card-text {
-    font-size: 0.7rem;
-  }
   .speed-options-grid {
     grid-template-columns: 1fr;
+  }
+  .game-overlay-modal {
+    padding: 18px 14px;
+    border-radius: 16px;
+  }
+  .game-modal-icon {
+    font-size: 2.6rem;
+    margin-bottom: 8px;
+  }
+  .game-modal-title {
+    font-size: 1.35rem;
+    margin-bottom: 6px;
+  }
+  .game-modal-desc {
+    font-size: 0.86rem;
+    margin-bottom: 16px;
+    line-height: 1.45;
+  }
+  .btn-game-play {
+    padding: 11px 24px;
+    font-size: 0.92rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .game-tabs {
+    grid-template-columns: 1fr;
+  }
+  .game-screen-wrapper {
+    padding: 10px 6px;
+  }
+  .memory-grid {
+    gap: 5px;
+  }
+  .card-face {
+    border-radius: 8px;
+    padding: 3px 1px;
+    border-width: 1px;
+  }
+  .card-back {
+    font-size: 0.98rem;
+  }
+  .card-icon {
+    font-size: 1.05rem;
+  }
+  .card-text {
+    font-size: 0.55rem;
+    line-height: 1.1;
+  }
+  .card-text.is-code {
+    font-size: 0.52rem;
   }
 }

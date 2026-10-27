@@ -6,6 +6,17 @@
 
 'use strict';
 
+/* ─── Helper: HTML Escaping to prevent HTML Injection & Navigation Bugs ─── */
+function escapeHTML(str) {
+  if (typeof str !== 'string') return str;
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 /* ─── 1. Web Audio API Synthesizer (Zero External Dependencies) ─── */
 const SoundFX = {
   ctx: null,
@@ -13,8 +24,12 @@ const SoundFX = {
 
   init() {
     if (!this.ctx) {
-      const AudioCtx = window.AudioContext || window.webkitAudioContext;
-      if (AudioCtx) this.ctx = new AudioCtx();
+      try {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) this.ctx = new AudioCtx();
+      } catch (e) {
+        console.warn('AudioContext not supported:', e);
+      }
     }
   },
 
@@ -28,61 +43,67 @@ const SoundFX = {
 
   play(type) {
     if (!this.enabled) return;
-    this.init();
-    if (!this.ctx) return;
-    if (this.ctx.state === 'suspended') this.ctx.resume();
+    try {
+      this.init();
+      if (!this.ctx) return;
+      if (this.ctx.state === 'suspended') {
+        this.ctx.resume().catch(() => {});
+      }
 
-    const t = this.ctx.currentTime;
-    const osc = this.ctx.createOscillator();
-    const gain = this.ctx.createGain();
-    osc.connect(gain);
-    gain.connect(this.ctx.destination);
+      const t = this.ctx.currentTime;
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
 
-    if (type === 'hit') {
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(500, t);
-      osc.frequency.exponentialRampToValueAtTime(150, t + 0.12);
-      gain.gain.setValueAtTime(0.25, t);
-      gain.gain.linearRampToValueAtTime(0.01, t + 0.12);
-      osc.start(t);
-      osc.stop(t + 0.12);
-    } else if (type === 'bomb') {
-      osc.type = 'sawtooth';
-      osc.frequency.setValueAtTime(200, t);
-      osc.frequency.exponentialRampToValueAtTime(40, t + 0.25);
-      gain.gain.setValueAtTime(0.3, t);
-      gain.gain.linearRampToValueAtTime(0.01, t + 0.25);
-      osc.start(t);
-      osc.stop(t + 0.25);
-    } else if (type === 'flip') {
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(320, t);
-      osc.frequency.exponentialRampToValueAtTime(580, t + 0.06);
-      gain.gain.setValueAtTime(0.12, t);
-      gain.gain.linearRampToValueAtTime(0.01, t + 0.06);
-      osc.start(t);
-      osc.stop(t + 0.06);
-    } else if (type === 'match') {
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(523.25, t);
-      osc.frequency.setValueAtTime(659.25, t + 0.08);
-      osc.frequency.setValueAtTime(783.99, t + 0.16);
-      gain.gain.setValueAtTime(0.2, t);
-      gain.gain.linearRampToValueAtTime(0.01, t + 0.28);
-      osc.start(t);
-      osc.stop(t + 0.28);
-    } else if (type === 'win') {
-      [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
-        const o = this.ctx.createOscillator();
-        const g = this.ctx.createGain();
-        o.connect(g);
-        g.connect(this.ctx.destination);
-        o.frequency.value = freq;
-        g.gain.setValueAtTime(0.18, t + idx * 0.09);
-        g.gain.linearRampToValueAtTime(0.01, t + idx * 0.09 + 0.22);
-        o.start(t + idx * 0.09);
-        o.stop(t + idx * 0.09 + 0.22);
-      });
+      if (type === 'hit') {
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(500, t);
+        osc.frequency.exponentialRampToValueAtTime(150, t + 0.12);
+        gain.gain.setValueAtTime(0.25, t);
+        gain.gain.linearRampToValueAtTime(0.01, t + 0.12);
+        osc.start(t);
+        osc.stop(t + 0.12);
+      } else if (type === 'bomb') {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(200, t);
+        osc.frequency.exponentialRampToValueAtTime(40, t + 0.25);
+        gain.gain.setValueAtTime(0.3, t);
+        gain.gain.linearRampToValueAtTime(0.01, t + 0.25);
+        osc.start(t);
+        osc.stop(t + 0.25);
+      } else if (type === 'flip') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(320, t);
+        osc.frequency.exponentialRampToValueAtTime(580, t + 0.06);
+        gain.gain.setValueAtTime(0.12, t);
+        gain.gain.linearRampToValueAtTime(0.01, t + 0.06);
+        osc.start(t);
+        osc.stop(t + 0.06);
+      } else if (type === 'match') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, t);
+        osc.frequency.setValueAtTime(659.25, t + 0.08);
+        osc.frequency.setValueAtTime(783.99, t + 0.16);
+        gain.gain.setValueAtTime(0.2, t);
+        gain.gain.linearRampToValueAtTime(0.01, t + 0.28);
+        osc.start(t);
+        osc.stop(t + 0.28);
+      } else if (type === 'win') {
+        [523.25, 659.25, 783.99, 1046.5].forEach((freq, idx) => {
+          const o = this.ctx.createOscillator();
+          const g = this.ctx.createGain();
+          o.connect(g);
+          g.connect(this.ctx.destination);
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(0.18, t + idx * 0.09);
+          g.gain.linearRampToValueAtTime(0.01, t + idx * 0.09 + 0.22);
+          o.start(t + idx * 0.09);
+          o.stop(t + idx * 0.09 + 0.22);
+        });
+      }
+    } catch (e) {
+      console.warn('Sound play error:', e);
     }
   }
 };
@@ -280,45 +301,64 @@ const BugSmasher = {
 
 /* ─── 3. GAME 2: MEMORY CARD MATCH ─── */
 const MemoryGame = {
+  // 8 pasang gambar & istilah identik (total 16 kartu)
   cardsData: [
-    { id: 1, text: '<a href="...">', icon: '🔗' },
-    { id: 1, text: 'Tautan / Link',  icon: '🌐' },
-    { id: 2, text: 'display: flex;', icon: '📐' },
-    { id: 2, text: 'Tata Letak Box', icon: '📦' },
-    { id: 3, text: 'let & const',   icon: '📦' },
-    { id: 3, text: 'Variabel JS',    icon: '💡' },
-    { id: 4, text: '<img alt="...">', icon: '🖼️' },
-    { id: 4, text: 'Gambar Web',     icon: '👁️' },
-    { id: 5, text: 'addEventListener', icon: '⚡' },
-    { id: 5, text: 'Tangani Klik',   icon: '🖱️' },
-    { id: 6, text: '// komentar',   icon: '💬' },
-    { id: 6, text: 'Catatan Kode',   icon: '📝' },
-    { id: 7, text: '404 Not Found',  icon: '🔍' },
-    { id: 7, text: 'Halaman Hilang', icon: '🚫' },
-    { id: 8, text: 'function()',     icon: '⚙️' },
-    { id: 8, text: 'Fungsi Reusable', icon: '🔁' }
+    { id: 1, text: 'Searching',   icon: '🔍' },
+    { id: 1, text: 'Searching',   icon: '🔍' },
+    { id: 2, text: 'Coding',      icon: '💻' },
+    { id: 2, text: 'Coding',      icon: '💻' },
+    { id: 3, text: 'Web Browser', icon: '🌐' },
+    { id: 3, text: 'Web Browser', icon: '🌐' },
+    { id: 4, text: 'Function',    icon: '⚙️' },
+    { id: 4, text: 'Function',    icon: '⚙️' },
+    { id: 5, text: 'CSS Style',   icon: '🎨' },
+    { id: 5, text: 'CSS Style',   icon: '🎨' },
+    { id: 6, text: 'Variable',    icon: '📦' },
+    { id: 6, text: 'Variable',    icon: '📦' },
+    { id: 7, text: 'JavaScript',  icon: '⚡' },
+    { id: 7, text: 'JavaScript',  icon: '⚡' },
+    { id: 8, text: 'Security',    icon: '🛡️' },
+    { id: 8, text: 'Security',    icon: '🛡️' }
   ],
   flippedCards: [],
   matchedPairs: 0,
   turns: 0,
   seconds: 0,
   timerInterval: null,
+  matchTimeout: null,
   isLocked: false,
 
+  clearMatchTimeout() {
+    if (this.matchTimeout) {
+      clearTimeout(this.matchTimeout);
+      this.matchTimeout = null;
+    }
+  },
+
   init() {
+    this.clearMatchTimeout();
+    clearInterval(this.timerInterval);
+    this.matchedPairs = 0;
+    this.turns = 0;
+    this.seconds = 0;
+    this.flippedCards = [];
+    this.isLocked = false;
+
     this.renderContainer();
+    this.renderInitialCards();
     this.updateStats();
   },
 
   renderContainer() {
     const container = document.getElementById('game-stage');
+    if (!container) return;
     container.innerHTML = `
       <div class="memory-grid" id="memory-grid"></div>
       <div class="game-overlay-modal" id="game-modal">
         <div class="game-modal-icon">🃏</div>
-        <h2 class="game-modal-title">Memory Match Kode</h2>
+        <h2 class="game-modal-title">Memory Match</h2>
         <p class="game-modal-desc">
-          Buka kartu dan pasangkan tag/kode dengan fungsi yang sesuai. Selesaikan dengan langkah paling sedikit!
+          Buka kartu dan temukan pasangan gambar yang sama. Selesaikan semua 8 pasang dengan langkah paling sedikit!
         </p>
         <button class="btn-game-play" onclick="MemoryGame.start()">
           ▶ Mulai Main
@@ -327,8 +367,21 @@ const MemoryGame = {
     `;
   },
 
+  renderInitialCards() {
+    const grid = document.getElementById('memory-grid');
+    if (!grid) return;
+    grid.innerHTML = Array(16).fill(0).map((_, idx) => `
+      <div class="memory-card preview-card" aria-hidden="true">
+        <div class="card-face card-back">&lt;/&gt;</div>
+      </div>
+    `).join('');
+  },
+
   start() {
-    document.getElementById('game-modal').style.display = 'none';
+    const modal = document.getElementById('game-modal');
+    if (modal) modal.style.display = 'none';
+
+    this.clearMatchTimeout();
     this.matchedPairs = 0;
     this.turns = 0;
     this.seconds = 0;
@@ -344,23 +397,41 @@ const MemoryGame = {
     // Kocok kartu
     const shuffled = [...this.cardsData].sort(() => Math.random() - 0.5);
     const grid = document.getElementById('memory-grid');
-    grid.innerHTML = shuffled.map((card, idx) => `
-      <div class="memory-card" id="mcard-${idx}" data-id="${card.id}" onclick="MemoryGame.flip(${idx})">
-        <div class="card-face card-back">&lt;/&gt;</div>
-        <div class="card-face card-front">
-          <span class="card-icon">${card.icon}</span>
-          <span class="card-text">${card.text}</span>
+    if (!grid) return;
+
+    grid.innerHTML = shuffled.map((card, idx) => {
+      const displayText = escapeHTML(card.text);
+      return `
+        <div class="memory-card" id="mcard-${idx}" data-id="${card.id}" role="button" tabindex="0"
+             onclick="MemoryGame.flip(${idx})"
+             onkeydown="MemoryGame.handleKey(event, ${idx})"
+             aria-label="Kartu nomor ${idx + 1}">
+          <div class="card-face card-back">&lt;/&gt;</div>
+          <div class="card-face card-front">
+            <span class="card-icon" aria-hidden="true">${card.icon}</span>
+            <span class="card-text">${displayText}</span>
+          </div>
         </div>
-      </div>
-    `).join('');
+      `;
+    }).join('');
 
     this.updateStats();
+  },
+
+  handleKey(e, idx) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      this.flip(idx);
+    }
   },
 
   flip(idx) {
     if (this.isLocked) return;
     const card = document.getElementById(`mcard-${idx}`);
+    if (!card) return;
     if (card.classList.contains('flipped') || card.classList.contains('matched')) return;
+    if (this.flippedCards.some(c => c.idx === idx)) return;
+    if (this.flippedCards.length >= 2) return;
 
     SoundFX.play('flip');
     card.classList.add('flipped');
@@ -368,38 +439,67 @@ const MemoryGame = {
 
     if (this.flippedCards.length === 2) {
       this.turns++;
+      this.updateStats();
       this.checkMatch();
     }
   },
 
   checkMatch() {
     this.isLocked = true;
+    if (this.flippedCards.length !== 2) {
+      this.isLocked = false;
+      return;
+    }
+
     const [c1, c2] = this.flippedCards;
+    if (!c1 || !c2 || !c1.card || !c2.card) {
+      this.flippedCards = [];
+      this.isLocked = false;
+      return;
+    }
 
     if (c1.id === c2.id) {
       // Cocok!
-      setTimeout(() => {
-        SoundFX.play('match');
-        c1.card.classList.add('matched');
-        c2.card.classList.add('matched');
-        this.matchedPairs++;
-        this.flippedCards = [];
-        this.isLocked = false;
-        this.updateStats();
+      this.clearMatchTimeout();
+      this.matchTimeout = setTimeout(() => {
+        try {
+          SoundFX.play('match');
+          if (c1.card) c1.card.classList.add('matched');
+          if (c2.card) c2.card.classList.add('matched');
+          this.matchedPairs++;
+          this.flippedCards = [];
+          this.isLocked = false;
+          this.updateStats();
 
-        if (this.matchedPairs === 8) {
-          this.victory();
+          if (this.matchedPairs >= 8) {
+            this.victory();
+          }
+        } catch (err) {
+          console.error(err);
+          this.isLocked = false;
         }
       }, 350);
     } else {
       // Tidak cocok
-      setTimeout(() => {
-        c1.card.classList.remove('flipped');
-        c2.card.classList.remove('flipped');
-        this.flippedCards = [];
-        this.isLocked = false;
-        this.updateStats();
-      }, 850);
+      this.clearMatchTimeout();
+      this.matchTimeout = setTimeout(() => {
+        try {
+          if (c1.card) c1.card.classList.add('mismatch');
+          if (c2.card) c2.card.classList.add('mismatch');
+
+          setTimeout(() => {
+            if (c1.card) c1.card.classList.remove('flipped', 'mismatch');
+            if (c2.card) c2.card.classList.remove('flipped', 'mismatch');
+            this.flippedCards = [];
+            this.isLocked = false;
+            this.updateStats();
+          }, 350);
+        } catch (err) {
+          console.error(err);
+          this.flippedCards = [];
+          this.isLocked = false;
+        }
+      }, 500);
     }
   },
 
@@ -408,12 +508,13 @@ const MemoryGame = {
     SoundFX.play('win');
 
     const modal = document.getElementById('game-modal');
+    if (!modal) return;
     modal.innerHTML = `
       <div class="game-modal-icon">🎉</div>
       <h2 class="game-modal-title">Hebat! Semua Pasangan Ditemukan</h2>
       <div class="game-score-banner">${this.turns} Langkah • Waktu: ${this.seconds} Detik</div>
       <p class="game-modal-desc">
-        Daya ingat sintaks kodingmu luar biasa tajam!
+        Daya ingat visualmu luar biasa tajam!
       </p>
       <button class="btn-game-play" onclick="MemoryGame.start()">
         🔄 Main Lagi
@@ -618,6 +719,7 @@ function setGameMode(mode) {
   clearInterval(BugSmasher.timerInterval);
   clearTimeout(BugSmasher.peepTimeout);
   clearInterval(MemoryGame.timerInterval);
+  MemoryGame.clearMatchTimeout();
   clearInterval(SpeedCode.timer);
 
   // Update tabs
